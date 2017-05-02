@@ -41,7 +41,8 @@ class czdsDownloader(object):
             raise czdsException("Unexpected response from CZDS while fetching urls list.")
 
         try:
-            files = json.loads(r.text)
+            # remove duplicate zone files
+            files = list(set(json.loads(r.text)))
         except Exception, e:
             raise czdsException("Unable to parse JSON returned from CZDS: " + str(e))
 
