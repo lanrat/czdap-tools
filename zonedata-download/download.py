@@ -74,7 +74,11 @@ class czdsDownloader(object):
     def prefetchZone(self, path):
         """ Do a HTTP HEAD call to check if filesize changed
         """
-        r = self.s.head(self.conf['base_url'] + path)
+        try:
+            r = self.s.head(self.conf['base_url'] + path)
+        except requests.exceptions.ConnectionError as exc:
+            raise czdsException(
+                "Unexpected response from CZDS while fetching '" + path + "': " + str(exc) + "." )
         if r.status_code != 200:
             raise czdsException("Unexpected response from CZDS while fetching '" + path + "'.")
         return self.parseHeaders(r.headers)
@@ -91,7 +95,11 @@ class czdsDownloader(object):
     def fetchZone(self, directory, path, chunksize = 1024):
         """ Do a regular GET call to fetch zonefile
         """
-        r = self.s.get(self.conf['base_url'] + path, stream = True)
+        try:
+            r = self.s.get(self.conf['base_url'] + path, stream = True)
+        except requests.exceptions.ConnectionError as exc:
+            raise czdsException(
+                "Unexpected response from CZDS while fetching '" + path + "': " + str(exc) + "." )
         if r.status_code != 200:
             raise czdsException("Unexpected response from CZDS while fetching '" + path + "'.")
         hData = self.parseHeaders(r.headers)
