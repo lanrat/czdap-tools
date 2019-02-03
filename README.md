@@ -1,7 +1,10 @@
 CZDAP Tools
 ===========
 
-Some registries allow users to download zone data directly from CZDAP, and others provide FTP credentials that you can use to login to their servers. These tools allow you to programatically perform these two tasks:
+# DEPRECATED Please use: [https://github.com/lanrat/czds](https://github.com/lanrat/czds)
+
+
+Some registries allow users to download zone data directly from CZDAP, and others provide FTP credentials that you can use to login to their servers. These tools allow you to programmatically perform these two tasks:
 
 * Decrypt FTP credentials downloaded from ICANN's CZDAP application.
 * Download zone data directly using the CZDAP API.
